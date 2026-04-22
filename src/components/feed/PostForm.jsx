@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { COMMUNITIES, INDUSTRIES, POST_TAGS, DISCUSSION_TAGS } from "../data/keywords";
-import { createPost } from "../services/api";
+import { COMMUNITIES, INDUSTRIES, POST_TAGS, DISCUSSION_TAGS } from "../../data/keywords";
+import { createPost } from "../../services/api";
 
 function Toggle({ checked, onChange }) {
   return (
@@ -21,15 +21,14 @@ function TBtn({ title, active, onMouseDown, children }) {
   );
 }
 
-export default function PopularDiscussions() {
+export default function PostForm({ isDiscussion = false }) {
   const navigate = useNavigate();
-  const [tab, setTab] = useState("Post");
   const [community, setCommunity] = useState(COMMUNITIES[0]);
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [coverPreview, setCoverPreview] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
-  const [activeTags, setActiveTags] = useState(["#AITrends"]);
+  const [activeTags, setActiveTags] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const fileRef = useRef();
@@ -37,7 +36,6 @@ export default function PopularDiscussions() {
   const savedRange = useRef(null);
   const [fmt, setFmt] = useState({ bold: false, italic: false });
 
-  const isDiscussion = tab === "Discussion";
   const SUGGESTED_TAGS = isDiscussion ? DISCUSSION_TAGS : POST_TAGS;
 
   const saveSelection = () => {
@@ -87,7 +85,6 @@ export default function PopularDiscussions() {
     setActiveTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]);
 
   const handleSubmit = async () => {
-    console.log("🔘 Post button clicked");
     if (!title.trim()) { alert("Please enter a title."); return; }
     if (!industry) { alert("Please select an industry."); return; }
     const content = editorRef.current?.innerHTML || "";
@@ -102,8 +99,7 @@ export default function PopularDiscussions() {
       setSubmitted(true);
       setTimeout(() => navigate("/home"), 1500);
     } catch (err) {
-      console.error("❌ Submit failed:", err);
-      alert(`Failed to ${isDiscussion ? "create discussion" : "post"}: ${err.message}`);
+      alert(`Failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -111,7 +107,7 @@ export default function PopularDiscussions() {
 
   if (submitted) {
     return (
-      <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-[1000] font-['Inter',sans-serif]">
+      <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-[1000]">
         <div className="bg-white rounded-2xl shadow-2xl p-10 flex flex-col items-center gap-4">
           <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -136,17 +132,9 @@ export default function PopularDiscussions() {
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </button>
-          <span className="text-lg font-semibold text-gray-900">Create Post/Discussion</span>
-        </div>
-
-        {/* Tabs */}
-        <div className="inline-flex bg-slate-100 rounded-xl p-1 gap-1 mb-5">
-          {["Post", "Discussion"].map((t) => (
-            <button key={t} onClick={() => setTab(t)}
-              className={`px-5 py-1.5 rounded-lg border-none cursor-pointer text-sm font-medium transition-all ${tab === t ? "bg-white text-gray-900 shadow-sm" : "bg-transparent text-gray-500 hover:text-gray-700"}`}>
-              {t}
-            </button>
-          ))}
+          <span className="text-lg font-semibold text-gray-900">
+            {isDiscussion ? "Create Discussion" : "Create Post"}
+          </span>
         </div>
 
         {/* Body */}

@@ -4,7 +4,7 @@ import { CURRENT_USER } from "../../data/keywords";
 const DRAWER_LINKS = [
   { name: "Home", to: "/home", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> },
   { name: "Gronetters", to: "/gronetters", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> },
-  { name: "Explore", to: "/explore", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg> },
+  { name: "Explore", to: "/explore", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> },
   { name: "Messages", to: "/messages", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> },
   { name: "Discussion", to: "/article", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/><line x1="9" y1="14" x2="13" y2="14"/></svg> },
   { name: "Profile", to: "/profile", icon: (props) => <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> },
@@ -14,21 +14,16 @@ const DRAWER_LINKS = [
 export default function Drawer({ isOpen, onClose }) {
   return (
     <>
-      {/* Overlay */}
       <div
         className={`fixed inset-0 bg-black/60 z-[60] transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={onClose}
       />
-
-      {/* Sidebar */}
       <div
         className={`fixed left-0 top-0 h-full w-80 bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col font-['Mada'] ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
-        {/* Header */}
-        <div className="p-6 flex items-center justify-between border-b border-gray-100">
+        <div className="px-6 pt-5 pb-3 flex items-center justify-between border-b border-gray-100">
           <div className="flex items-center gap-2">
             <span className="font-black text-3xl tracking-tighter text-[#191970]">Gronet</span>
-            <div className="w-2 h-2 rounded-full bg-[#191970] mt-auto mb-1.5"></div>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-400">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -37,8 +32,7 @@ export default function Drawer({ isOpen, onClose }) {
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto py-6 px-4">
+        <nav className="flex-1 overflow-y-auto py-3 px-4">
           <ul className="space-y-2">
             {DRAWER_LINKS.map((link) => (
               <li key={link.name}>
@@ -63,7 +57,6 @@ export default function Drawer({ isOpen, onClose }) {
           </ul>
         </nav>
 
-        {/* Footer */}
         <div className="p-6 border-t border-gray-100">
           <div className="flex items-center gap-4 p-4 bg-gray-50 rounded-[1.5rem]">
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white shadow-sm bg-blue-100">

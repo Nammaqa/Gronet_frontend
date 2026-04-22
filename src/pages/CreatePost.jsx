@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { COMMUNITIES, INDUSTRIES, POST_TAGS, DISCUSSION_TAGS } from "../data/keywords";
+import { COMMUNITIES, INDUSTRIES, POST_TAGS } from "../data/keywords";
 import { createPost } from "../services/api";
 
 function Toggle({ checked, onChange }) {
@@ -21,9 +21,8 @@ function TBtn({ title, active, onMouseDown, children }) {
   );
 }
 
-export default function PopularDiscussions() {
+export default function CreatePost() {
   const navigate = useNavigate();
-  const [tab, setTab] = useState("Post");
   const [community, setCommunity] = useState(COMMUNITIES[0]);
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
@@ -36,9 +35,6 @@ export default function PopularDiscussions() {
   const editorRef = useRef();
   const savedRange = useRef(null);
   const [fmt, setFmt] = useState({ bold: false, italic: false });
-
-  const isDiscussion = tab === "Discussion";
-  const SUGGESTED_TAGS = isDiscussion ? DISCUSSION_TAGS : POST_TAGS;
 
   const saveSelection = () => {
     const sel = window.getSelection();
@@ -103,7 +99,7 @@ export default function PopularDiscussions() {
       setTimeout(() => navigate("/home"), 1500);
     } catch (err) {
       console.error("❌ Submit failed:", err);
-      alert(`Failed to ${isDiscussion ? "create discussion" : "post"}: ${err.message}`);
+      alert(`Failed to post: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -118,7 +114,7 @@ export default function PopularDiscussions() {
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <p className="text-lg font-semibold text-gray-900">{isDiscussion ? "Discussion Created!" : "Post Published!"}</p>
+          <p className="text-lg font-semibold text-gray-900">Post Published!</p>
           <p className="text-sm text-gray-500">Redirecting to home...</p>
         </div>
       </div>
@@ -130,23 +126,13 @@ export default function PopularDiscussions() {
       <div className="w-full max-w-[900px] bg-white rounded-2xl shadow-2xl p-7">
 
         {/* Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-5">
           <button onClick={() => navigate(-1)} className="p-1 bg-transparent border-none cursor-pointer hover:bg-gray-100 rounded-lg transition-colors">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
           </button>
-          <span className="text-lg font-semibold text-gray-900">Create Post/Discussion</span>
-        </div>
-
-        {/* Tabs */}
-        <div className="inline-flex bg-slate-100 rounded-xl p-1 gap-1 mb-5">
-          {["Post", "Discussion"].map((t) => (
-            <button key={t} onClick={() => setTab(t)}
-              className={`px-5 py-1.5 rounded-lg border-none cursor-pointer text-sm font-medium transition-all ${tab === t ? "bg-white text-gray-900 shadow-sm" : "bg-transparent text-gray-500 hover:text-gray-700"}`}>
-              {t}
-            </button>
-          ))}
+          <span className="text-lg font-semibold text-gray-900">Create Post</span>
         </div>
 
         {/* Body */}
@@ -176,7 +162,7 @@ export default function PopularDiscussions() {
             <div>
               <label className="block text-[11px] font-semibold text-gray-400 tracking-wider uppercase mb-1.5">Title *</label>
               <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}
-                placeholder={isDiscussion ? "Enter discussion title..." : "What's on your mind?"}
+                placeholder="What's on your mind?"
                 className="w-full h-[42px] px-3 rounded-lg bg-slate-100 border-none text-[13px] text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-slate-300" />
             </div>
 
@@ -227,7 +213,7 @@ export default function PopularDiscussions() {
                 <div ref={editorRef} contentEditable suppressContentEditableWarning
                   onKeyUp={() => { saveSelection(); updateFmt(); }}
                   onMouseUp={() => { saveSelection(); updateFmt(); }}
-                  data-placeholder={isDiscussion ? "Share your thoughts..." : "Write your post content here..."}
+                  data-placeholder="Write your post content here..."
                   className="min-h-[90px] px-3 py-2.5 text-[13px] text-gray-700 leading-relaxed focus:outline-none bg-white empty:before:content-[attr(data-placeholder)] empty:before:text-gray-300"
                 />
               </div>
@@ -247,7 +233,7 @@ export default function PopularDiscussions() {
               </div>
               <p className="text-[11px] font-semibold text-gray-400 tracking-wider uppercase mt-5 mb-2.5">Suggested Tags</p>
               <div className="flex flex-col gap-2">
-                {SUGGESTED_TAGS.map((tag) => (
+                {POST_TAGS.map((tag) => (
                   <button key={tag} onClick={() => toggleTag(tag)}
                     className={`px-3 py-1.5 rounded-full border-none cursor-pointer text-xs font-medium text-left transition-all ${activeTags.includes(tag) ? "bg-[#0f172a] text-white" : "bg-slate-200 text-slate-800 hover:bg-slate-300"}`}>
                     {tag}
@@ -264,7 +250,7 @@ export default function PopularDiscussions() {
           <button className="text-sm text-gray-900 bg-transparent border-none cursor-pointer hover:text-gray-600 transition-colors">Save as Draft</button>
           <button onClick={handleSubmit} disabled={loading}
             className={`px-5 py-2.5 rounded-xl text-white text-sm font-semibold border-none cursor-pointer active:scale-95 transition-all ${loading ? "bg-slate-400 cursor-not-allowed" : "bg-[#0f172a] hover:bg-slate-800"}`}>
-            {loading ? "Posting..." : isDiscussion ? "Create Discussion" : "Post"}
+            {loading ? "Posting..." : "Post"}
           </button>
         </div>
       </div>

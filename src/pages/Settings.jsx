@@ -374,7 +374,7 @@ export default function Settings() {
   return (
     <PageLayout>
       <div className="w-full bg-[#f5f7fb] min-h-screen font-['Mada']">
-        <div className="w-full px-4 py-8">
+        <div className="w-full px-4 md:px-6 lg:px-10 py-6 font-['Mada']">
           {/* ── Top headings row ── */}
           <div className="flex flex-col lg:flex-row gap-6 mb-5 items-baseline">
             <div className="w-full lg:w-52 flex-shrink-0">

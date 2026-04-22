@@ -14,6 +14,9 @@ import Settings from "./pages/Settings";
 
 import PopularDiscussions from "./pages/PopularDiscussions";
 import ArticleDetail from "./pages/ArticleDetail";
+import ComingSoon from "./pages/ComingSoon";
+import CreatePost from "./pages/CreatePost";
+import CreateDiscussion from "./pages/CreateDiscussion";
 
 function App() {
   return (
@@ -28,7 +31,10 @@ function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/discussions" element={<PopularDiscussions />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/create-discussion" element={<CreateDiscussion />} />
         <Route path="/article" element={<ArticleDetail />} />
+        <Route path="*" element={<ComingSoon />} />
       </Routes>
     </Router>
   );

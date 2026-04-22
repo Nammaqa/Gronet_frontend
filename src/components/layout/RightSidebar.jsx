@@ -35,10 +35,13 @@ export default function RightSidebar() {
           className="w-14 h-14 rounded-2xl bg-[#191970] hover:bg-[#2563eb] active:scale-95 transition-all shadow-lg flex items-center justify-center"
         >
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="3" width="7" height="7" rx="1"/>
-            <rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            {/* 3 horizontal lines */}
+            <line x1="3" y1="5" x2="14" y2="5" />
+            <line x1="3" y1="10" x2="14" y2="10" />
+            <line x1="3" y1="15" x2="10" y2="15" />
+            {/* Half pencil bottom-right */}
+            <path d="M15 13l3 3-4 1 1-4z" />
+            <line x1="15" y1="13" x2="18" y2="10" />
           </svg>
         </button>
       </div>

@@ -226,9 +226,9 @@ export default function ProfilePage() {
 
   return (
     <PageLayout>
-      <div className="w-full px-6 lg:px-10 py-8">
+      <div className="w-full px-4 md:px-6 lg:px-10 py-6">
         <ProfileHeader />
-        <div className="mt-8 grid grid-cols-[1fr_2fr] gap-6">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
           <div className="space-y-4">
             <SidebarAbout />
           </div>

@@ -76,7 +76,7 @@ export default function MyGronetters() {
 
   return (
     <PageLayout>
-      <div className="w-full min-h-screen bg-[#F5F7FA] p-8 font-['Mada']">
+      <div className="w-full min-h-screen bg-[#F5F7FA] px-4 md:px-8 py-6 font-['Mada']">
         {/* Header */}
         <div className="flex items-start justify-between flex-wrap gap-4 mb-6">
           <div>

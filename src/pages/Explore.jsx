@@ -78,7 +78,7 @@ function MediumCard({ card }) {
 export default function Explore() {
   return (
     <PageLayout>
-      <div className="w-full px-6 lg:px-10 py-8 font-['Mada']">
+      <div className="w-full px-4 md:px-6 lg:px-10 py-6 font-['Mada']">
         <div className="mb-8"><SearchBar /></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <LargeCard card={EXPLORE_CARDS[0]} />
