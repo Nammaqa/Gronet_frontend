@@ -2,7 +2,7 @@ import { CURRENT_USER } from "../../data/keywords";
 
 export default function Sidebar() {
   return (
-    <div className="w-full xl:w-80 flex flex-col gap-6 font-['Mada']">
+    <div className="w-full flex flex-col gap-4 font-['Mada']">
       {/* Profile Card */}
       <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden text-center">
         <div className="h-24 bg-[#191970] relative">

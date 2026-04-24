@@ -1,189 +1,21 @@
 import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
+import ContentWrapper from "../components/layout/ContentWrapper";
+import {
+  ProfileSettingsIcon, AccountIcon, NotificationsIcon, PrivacyIcon,
+  ChangeCoverIcon, EditAvatarIcon, AddSkillIcon
+} from "../components/Icons";
 
 // ── Sidebar ──────────────────────────────────────────────────────
 const NAV_ITEMS = [
-  {
-    label: "Profile Settings",
-    icon: (
-      <svg
-        width="17"
-        height="17"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-    ),
-  },
-  {
-    label: "Account",
-    icon: (
-      <svg
-        width="17"
-        height="17"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Notifications",
-    icon: (
-      <svg
-        width="17"
-        height="17"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-      </svg>
-    ),
-  },
-  {
-    label: "Privacy",
-    icon: (
-      <svg
-        width="17"
-        height="17"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </svg>
-    ),
-  },
+  { label: "Profile Settings", icon: <ProfileSettingsIcon className="w-4 h-4" /> },
+  { label: "Account",          icon: <AccountIcon className="w-4 h-4" /> },
+  { label: "Notifications",    icon: <NotificationsIcon className="w-4 h-4" /> },
+  { label: "Privacy",          icon: <PrivacyIcon className="w-4 h-4" /> },
 ];
 
 function Sidebar({ active, onChange }) {
   return null;
-}
-
-// ── Cover + Avatar ───────────────────────────────────────────────
-function ProfileHeaderSection({
-  cover,
-  onCoverChange,
-  avatar,
-  onAvatarChange,
-}) {
-  return (
-    <div className="flex flex-col sm:flex-row gap-6 items-stretch">
-      {/* Cover */}
-      <div className="flex-1 flex flex-col">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">
-          Cover Photo
-        </p>
-        <div
-          className="relative flex-1 min-h-[140px] rounded-2xl overflow-hidden shadow-sm"
-          style={{
-            background:
-              "linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #7f1d1d 100%)",
-          }}
-        >
-          {cover && (
-            <img
-              src={cover}
-              alt="cover"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          )}
-          <label className="absolute inset-0 flex items-center justify-center cursor-pointer">
-            <span className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-white/30 transition-colors">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="17 8 12 3 7 8" />
-                <line x1="12" y1="3" x2="12" y2="15" />
-              </svg>
-              Change Cover
-            </span>
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={onCoverChange}
-            />
-          </label>
-        </div>
-        <p className="text-[11px] text-gray-400 mt-1.5">
-          Recommended: 1500 × 500 px
-        </p>
-      </div>
-
-      {/* Avatar */}
-      <div className="flex flex-col items-center justify-center gap-3 sm:w-36">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider self-start sm:self-center">
-          Photo
-        </p>
-        <div className="relative w-24 h-24">
-          <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-gray-100">
-            <img
-              src={
-                avatar ||
-                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop"
-              }
-              alt="avatar"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <label className="absolute bottom-0.5 right-0.5 w-7 h-7 bg-[#191970] hover:bg-[#2563eb] rounded-full flex items-center justify-center cursor-pointer shadow-md transition-colors">
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="white"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-            <input
-              type="file"
-              accept="image/*"
-              className="hidden"
-              onChange={onAvatarChange}
-            />
-          </label>
-        </div>
-        <p className="text-[11px] text-gray-400 text-center">
-          JPG, PNG · Max 2MB
-        </p>
-      </div>
-    </div>
-  );
 }
 
 // ── Input Field ──────────────────────────────────────────────────
@@ -280,19 +112,7 @@ function SkillsSection({ skills, onRemove, onAdd }) {
           onClick={handleAdd}
           className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#191970]/20 bg-[#191970]/5 text-[#191970] text-sm font-bold hover:bg-[#191970] hover:text-white hover:border-[#191970] transition-all"
         >
-          <svg
-            width="13"
-            height="13"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
+          <AddSkillIcon className="w-3.5 h-3.5" />
           Add Expertise
         </button>
       </div>
@@ -373,8 +193,8 @@ export default function Settings() {
 
   return (
     <PageLayout>
-      <div className="w-full bg-[#f5f7fb] min-h-screen font-['Mada']">
-        <div className="w-full px-4 py-8">
+      <ContentWrapper>
+        <div className="w-full bg-[#f5f7fb] font-['Mada']">
           {/* ── Top headings row ── */}
           <div className="flex flex-col lg:flex-row gap-6 mb-5 items-baseline">
             <div className="w-full lg:w-52 flex-shrink-0">
@@ -461,20 +281,7 @@ export default function Settings() {
                         )}
                         <label className="absolute inset-0 flex items-center justify-center cursor-pointer">
                           <span className="flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-xs font-bold px-4 py-2 rounded-full border border-white/30 transition-colors">
-                            <svg
-                              width="13"
-                              height="13"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                              <polyline points="17 8 12 3 7 8" />
-                              <line x1="12" y1="3" x2="12" y2="15" />
-                            </svg>
+                            <ChangeCoverIcon className="w-3.5 h-3.5" />
                             Change Cover
                           </span>
                           <input
@@ -503,26 +310,9 @@ export default function Settings() {
                             className="w-full h-full object-cover"
                           />
                         </div>
-                        <label className="absolute bottom-0.5 right-0.5 w-7 h-7 bg-[#191970] hover:bg-[#2563eb] rounded-full flex items-center justify-center cursor-pointer shadow-md transition-colors">
-                          <svg
-                            width="12"
-                            height="12"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="white"
-                            strokeWidth="2.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                          </svg>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            className="hidden"
-                            onChange={handleFile(setAvatar)}
-                          />
+                        <label className="absolute bottom-0 right-0 w-8 h-8 bg-[#191970] hover:bg-[#1e2d8a] hover:scale-110 rounded-full flex items-center justify-center cursor-pointer shadow-lg transition-all duration-200">
+                          <EditAvatarIcon className="w-4 h-4" />
+                          <input type="file" accept="image/*" className="hidden" onChange={handleFile(setAvatar)} />
                         </label>
                       </div>
                       <p className="text-[11px] text-gray-400 text-center">
@@ -613,7 +403,7 @@ export default function Settings() {
             </div>
           </div>
         </div>
-      </div>
+      </ContentWrapper>
     </PageLayout>
   );
 }

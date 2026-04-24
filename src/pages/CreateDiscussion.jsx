@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function PopularDiscussions() {
+export default function CreateDiscussion() {
   const navigate = useNavigate();
   useEffect(() => {
     navigate("/create-post", { replace: true });

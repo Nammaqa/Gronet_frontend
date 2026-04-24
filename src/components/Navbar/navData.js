@@ -1,47 +1,38 @@
 export const NAV_ITEMS = [
   {
     label: "Community",
+    to: "/community",
     dropdown: [
-      "Parichaya",
-      "Gronet",
-      "nConnect",
-      "Success Stories",
-      "Testimonials",
+      { label: "Parichaya", to: "/community/parichaya" },
+      { label: "Gronet", to: "/home" },
+      { label: "nConnect", to: "/community/nconnect" },
+      { label: "Success Stories", to: "/community/success-stories" },
+      { label: "Testimonials", to: "/community/testimonials" },
     ],
   },
-  {
-    label: "nAcademy",
-    dropdown: null,
-  },
-  {
-    label: "Articles",
-    dropdown: null,
-  },
+  { label: "nAcademy", to: "/nacademy", dropdown: null },
+  { label: "Articles", to: "/articles", dropdown: null },
   {
     label: "Abyasa",
+    to: "/abyasa",
     dropdown: [
-      "Programming Compiler",
-      "Testcase Management",
-      "Quiz Management",
-      "Website, API, SQL",
-      "Quiz of the Day",
+      { label: "Programming Compiler", to: "/abyasa/compiler" },
+      { label: "Testcase Management", to: "/abyasa/testcase" },
+      { label: "Quiz Management", to: "/abyasa/quiz" },
+      { label: "Website, API, SQL", to: "/abyasa/web-api-sql" },
+      { label: "Quiz of the Day", to: "/abyasa/quiz-of-the-day" },
     ],
   },
   {
     label: "nCareer",
+    to: "/ncareer",
     dropdown: [
-      "Jobs",
-      "Interview Questions",
-      "BoWizzy",
-      "nStore",
+      { label: "Jobs", to: "/ncareer/jobs" },
+      { label: "Interview Questions", to: "/ncareer/interview" },
+      { label: "BoWizzy", to: "/ncareer/bowizzy" },
+      { label: "nStore", to: "/ncareer/nstore" },
     ],
   },
-  {
-    label: "Hire From Us",
-    dropdown: null,
-  },
-  {
-    label: "Reach Out to Us",
-    dropdown: null,
-  },
+  { label: "Hire From Us", to: "/hire", dropdown: null },
+  { label: "Reach Out to Us", to: "/reach-out", dropdown: null },
 ];
