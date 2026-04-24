@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import PageLayout from "../components/layout/PageLayout";
+import ContentWrapper from "../components/layout/ContentWrapper";
 
 export default function ComingSoon() {
   const navigate = useNavigate();
@@ -8,7 +9,8 @@ export default function ComingSoon() {
 
   return (
     <PageLayout>
-      <div className="flex flex-col items-center justify-center min-h-[70vh] px-6 font-['Mada']">
+      <ContentWrapper>
+        <div className="flex flex-col items-center justify-center min-h-[60vh] font-['Mada']">
         <div className="w-16 h-16 bg-[#191970]/10 rounded-2xl flex items-center justify-center mb-6">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#191970" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -28,7 +30,8 @@ export default function ComingSoon() {
         >
           Go Back
         </button>
-      </div>
+        </div>
+      </ContentWrapper>
     </PageLayout>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { COMMUNITIES, INDUSTRIES, POST_TAGS } from "../data/keywords";
+import { COMMUNITIES, INDUSTRIES, POST_TAGS, DISCUSSION_TAGS } from "../data/keywords";
 import { createPost } from "../services/api";
 
 function Toggle({ checked, onChange }) {
@@ -23,18 +23,30 @@ function TBtn({ title, active, onMouseDown, children }) {
 
 export default function CreatePost() {
   const navigate = useNavigate();
+  const [tab, setTab] = useState("Post");
   const [community, setCommunity] = useState(COMMUNITIES[0]);
   const [industry, setIndustry] = useState("");
   const [title, setTitle] = useState("");
   const [coverPreview, setCoverPreview] = useState(null);
   const [isPublic, setIsPublic] = useState(true);
-  const [activeTags, setActiveTags] = useState(["#AITrends"]);
+  const [activeTags, setActiveTags] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const fileRef = useRef();
   const editorRef = useRef();
   const savedRange = useRef(null);
   const [fmt, setFmt] = useState({ bold: false, italic: false });
+
+  const isDiscussion = tab === "Discussion";
+  const SUGGESTED_TAGS = isDiscussion ? DISCUSSION_TAGS : POST_TAGS;
+
+  // Reset form when switching tabs
+  const handleTabSwitch = (newTab) => {
+    setTab(newTab);
+    setTitle("");
+    setActiveTags([]);
+    if (editorRef.current) editorRef.current.innerHTML = "";
+  };
 
   const saveSelection = () => {
     const sel = window.getSelection();
@@ -83,7 +95,6 @@ export default function CreatePost() {
     setActiveTags((prev) => prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]);
 
   const handleSubmit = async () => {
-    console.log("🔘 Post button clicked");
     if (!title.trim()) { alert("Please enter a title."); return; }
     if (!industry) { alert("Please select an industry."); return; }
     const content = editorRef.current?.innerHTML || "";
@@ -98,8 +109,7 @@ export default function CreatePost() {
       setSubmitted(true);
       setTimeout(() => navigate("/home"), 1500);
     } catch (err) {
-      console.error("❌ Submit failed:", err);
-      alert(`Failed to post: ${err.message}`);
+      alert(`Failed: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -114,7 +124,7 @@ export default function CreatePost() {
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <p className="text-lg font-semibold text-gray-900">Post Published!</p>
+          <p className="text-lg font-semibold text-gray-900">{isDiscussion ? "Discussion Created!" : "Post Published!"}</p>
           <p className="text-sm text-gray-500">Redirecting to home...</p>
         </div>
       </div>
@@ -123,16 +133,30 @@ export default function CreatePost() {
 
   return (
     <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-[1000] p-5 font-['Inter',sans-serif]">
-      <div className="w-full max-w-[900px] bg-white rounded-2xl shadow-2xl p-7">
+      <div className="w-full max-w-[900px] bg-white rounded-2xl shadow-2xl p-7 overflow-y-auto max-h-[95vh] scrollbar-hide">
 
         {/* Header */}
-        <div className="flex items-center gap-3 mb-5">
-          <button onClick={() => navigate(-1)} className="p-1 bg-transparent border-none cursor-pointer hover:bg-gray-100 rounded-lg transition-colors">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
-          </button>
-          <span className="text-lg font-semibold text-gray-900">Create Post</span>
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-3">
+            <button onClick={() => navigate(-1)} className="p-1 bg-transparent border-none cursor-pointer hover:bg-gray-100 rounded-lg transition-colors">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#111827" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              </svg>
+            </button>
+            <span className="text-lg font-semibold text-gray-900">
+              {isDiscussion ? "Create Discussion" : "Create Post"}
+            </span>
+          </div>
+
+          {/* Tab Switcher */}
+          <div className="inline-flex bg-slate-100 rounded-xl p-1 gap-1">
+            {["Post", "Discussion"].map((t) => (
+              <button key={t} onClick={() => handleTabSwitch(t)}
+                className={`px-5 py-1.5 rounded-lg border-none cursor-pointer text-sm font-medium transition-all ${tab === t ? "bg-white text-gray-900 shadow-sm" : "bg-transparent text-gray-500 hover:text-gray-700"}`}>
+                {t}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Body */}
@@ -160,9 +184,11 @@ export default function CreatePost() {
 
             {/* Title */}
             <div>
-              <label className="block text-[11px] font-semibold text-gray-400 tracking-wider uppercase mb-1.5">Title *</label>
+              <label className="block text-[11px] font-semibold text-gray-400 tracking-wider uppercase mb-1.5">
+                {isDiscussion ? "Discussion Title *" : "Title *"}
+              </label>
               <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}
-                placeholder="What's on your mind?"
+                placeholder={isDiscussion ? "Enter discussion title..." : "What's on your mind?"}
                 className="w-full h-[42px] px-3 rounded-lg bg-slate-100 border-none text-[13px] text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-slate-300" />
             </div>
 
@@ -213,7 +239,7 @@ export default function CreatePost() {
                 <div ref={editorRef} contentEditable suppressContentEditableWarning
                   onKeyUp={() => { saveSelection(); updateFmt(); }}
                   onMouseUp={() => { saveSelection(); updateFmt(); }}
-                  data-placeholder="Write your post content here..."
+                  data-placeholder={isDiscussion ? "Share your thoughts to start a discussion..." : "Write your post content here..."}
                   className="min-h-[90px] px-3 py-2.5 text-[13px] text-gray-700 leading-relaxed focus:outline-none bg-white empty:before:content-[attr(data-placeholder)] empty:before:text-gray-300"
                 />
               </div>
@@ -233,7 +259,7 @@ export default function CreatePost() {
               </div>
               <p className="text-[11px] font-semibold text-gray-400 tracking-wider uppercase mt-5 mb-2.5">Suggested Tags</p>
               <div className="flex flex-col gap-2">
-                {POST_TAGS.map((tag) => (
+                {SUGGESTED_TAGS.map((tag) => (
                   <button key={tag} onClick={() => toggleTag(tag)}
                     className={`px-3 py-1.5 rounded-full border-none cursor-pointer text-xs font-medium text-left transition-all ${activeTags.includes(tag) ? "bg-[#0f172a] text-white" : "bg-slate-200 text-slate-800 hover:bg-slate-300"}`}>
                     {tag}
@@ -250,7 +276,7 @@ export default function CreatePost() {
           <button className="text-sm text-gray-900 bg-transparent border-none cursor-pointer hover:text-gray-600 transition-colors">Save as Draft</button>
           <button onClick={handleSubmit} disabled={loading}
             className={`px-5 py-2.5 rounded-xl text-white text-sm font-semibold border-none cursor-pointer active:scale-95 transition-all ${loading ? "bg-slate-400 cursor-not-allowed" : "bg-[#0f172a] hover:bg-slate-800"}`}>
-            {loading ? "Posting..." : "Post"}
+            {loading ? "Posting..." : isDiscussion ? "Create Discussion" : "Post"}
           </button>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
+import ContentWrapper from "../components/layout/ContentWrapper";
 import { PROFILE_USER, PROFILE_TABS, PROFILE_POSTS } from "../data/keywords";
+import { LocationIcon, BuildingIcon, HeartIcon, MessageIcon } from "../components/Icons";
 
 function ProfileHeader() {
   return (
@@ -51,37 +53,21 @@ function ProfileHeader() {
       <div className="bg-white rounded-b-2xl px-8 pt-4 pb-5">
         {/* Spacer for avatar overlap */}
         <div className="h-14" />
-        <div className="flex items-end justify-between">
-          <div>
-            {/* Name, subtitle, tags below avatar */}
-            <h1
-              style={{ color: "#000000", fontWeight: 400, fontFamily: "Mada, sans-serif" }}
-              className="text-2xl leading-tight"
-            >
-              {PROFILE_USER.name}
-            </h1>
-            <p className="text-sm text-gray-500 mt-1">{PROFILE_USER.subtitle}</p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {PROFILE_USER.tags.map((tag) => (
-                <span key={tag.label} className={`text-[11px] font-bold tracking-wider px-3 py-1 rounded-full uppercase ${tag.color}`}>
-                  {tag.label}
-                </span>
-              ))}
-            </div>
-          </div>
-          {/* Connect button — bottom-right of card */}
-          <button
-            className="flex items-center gap-2 bg-[#191970] hover:bg-[#1e2d8a] text-white text-sm font-semibold transition-colors flex-shrink-0"
-            style={{ height: '40px', borderRadius: '12px', paddingTop: '10px', paddingBottom: '10px', paddingLeft: '32px', paddingRight: '32px', gap: '7.99px' }}
+        <div>
+          <h1
+            style={{ color: "#000000", fontWeight: 400, fontFamily: "Mada, sans-serif" }}
+            className="text-2xl leading-tight"
           >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <line x1="19" y1="8" x2="19" y2="14"/>
-              <line x1="22" y1="11" x2="16" y2="11"/>
-            </svg>
-            Connect
-          </button>
+            {PROFILE_USER.name}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">{PROFILE_USER.subtitle}</p>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {PROFILE_USER.tags.map((tag) => (
+              <span key={tag.label} className={`text-[11px] font-bold tracking-wider px-3 py-1 rounded-full uppercase ${tag.color}`}>
+                {tag.label}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -101,37 +87,11 @@ function SidebarAbout() {
       </p>
       <div className="mt-4 space-y-2 text-sm text-gray-500">
         <div className="flex items-center gap-2">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-gray-400"
-          >
-            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-            <circle cx="12" cy="10" r="3" />
-          </svg>
+          <LocationIcon className="w-3.5 h-3.5 text-gray-400" />
           {PROFILE_USER.location}
         </div>
         <div className="flex items-center gap-2">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-gray-400"
-          >
-            <rect x="2" y="7" width="20" height="14" rx="2" />
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-          </svg>
+          <BuildingIcon className="w-3.5 h-3.5 text-gray-400" />
           {PROFILE_USER.organization}
         </div>
       </div>
@@ -187,33 +147,11 @@ function PostCard({ post }) {
       )}
       <div className="flex items-center gap-5 text-sm text-gray-400">
         <button className="flex items-center gap-1.5 hover:text-blue-500 transition-colors">
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
+          <HeartIcon className="w-4 h-4" />
           {post.likes}
         </button>
         <button className="flex items-center gap-1.5 hover:text-blue-500 transition-colors">
-          <svg
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-          </svg>
+          <MessageIcon className="w-4 h-4" />
           {post.comments}
         </button>
       </div>
@@ -226,22 +164,18 @@ export default function ProfilePage() {
 
   return (
     <PageLayout>
-      <div className="w-full px-4 md:px-6 lg:px-10 py-6">
+      <ContentWrapper>
         <ProfileHeader />
-        <div className="mt-8 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
-          <div className="space-y-4">
-            <SidebarAbout />
-          </div>
+        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-6">
+          <div className="space-y-4"><SidebarAbout /></div>
           <div>
             <Tabs active={activeTab} onChange={setActiveTab} />
             <div className="mt-4 space-y-4">
-              {PROFILE_POSTS.map((post) => (
-                <PostCard key={post.id} post={post} />
-              ))}
+              {PROFILE_POSTS.map((post) => (<PostCard key={post.id} post={post} />))}
             </div>
           </div>
         </div>
-      </div>
+      </ContentWrapper>
     </PageLayout>
   );
 }

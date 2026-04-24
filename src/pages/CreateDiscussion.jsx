@@ -1,5 +1,10 @@
-import PostForm from "../components/feed/PostForm";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateDiscussion() {
-  return <PostForm isDiscussion={true} />;
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/create-post", { replace: true });
+  }, [navigate]);
+  return null;
 }

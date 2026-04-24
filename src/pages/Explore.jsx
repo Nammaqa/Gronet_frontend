@@ -1,4 +1,5 @@
 import PageLayout from "../components/layout/PageLayout";
+import ContentWrapper from "../components/layout/ContentWrapper";
 import { EXPLORE_CARDS } from "../data/keywords";
 
 function SearchBar() {
@@ -78,14 +79,14 @@ function MediumCard({ card }) {
 export default function Explore() {
   return (
     <PageLayout>
-      <div className="w-full px-4 md:px-6 lg:px-10 py-6 font-['Mada']">
-        <div className="mb-8"><SearchBar /></div>
+      <ContentWrapper>
+        <div className="mb-6"><SearchBar /></div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <LargeCard card={EXPLORE_CARDS[0]} />
           <MediumCard card={EXPLORE_CARDS[1]} />
           <MediumCard card={EXPLORE_CARDS[2]} />
         </div>
-      </div>
+      </ContentWrapper>
     </PageLayout>
   );
 }

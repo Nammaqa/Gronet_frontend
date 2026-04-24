@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PageLayout from "../components/layout/PageLayout";
+import ContentWrapper from "../components/layout/ContentWrapper";
 import { ARTICLE, ARTICLE_COMMENTS } from "../data/keywords";
+import { HeartIcon, MessageIcon, ShareIcon, BookmarkIcon, SendIcon } from "../components/Icons";
 
 function CommentItem({ comment, nested = false }) {
   const [liked, setLiked] = useState(false);
@@ -28,18 +30,7 @@ function CommentItem({ comment, nested = false }) {
             onClick={() => setLiked(!liked)}
             className={`flex items-center gap-1 text-xs font-semibold transition-colors ${liked ? "text-[#2563eb]" : "text-gray-400 hover:text-[#2563eb]"}`}
           >
-            <svg
-              width="13"
-              height="13"
-              viewBox="0 0 24 24"
-              fill={liked ? "currentColor" : "none"}
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
+            <HeartIcon className="w-3.5 h-3.5" filled={liked} />
             {comment.likes + (liked ? 1 : 0)}
           </button>
           <button className="text-xs font-semibold text-gray-400 hover:text-[#2563eb] transition-colors">
@@ -112,11 +103,9 @@ export default function ArticleDetail() {
         </div>
 
         {/* Article Card */}
-        <div className="flex justify-center px-4 -mt-12 pb-16 relative z-10">
-          <div
-            className="w-full bg-white shadow-lg border border-gray-100 flex flex-col rounded-2xl overflow-hidden"
-            style={{ maxWidth: "848px" }}
-          >
+        <ContentWrapper>
+          <div className="-mt-12 relative z-10 pb-16">
+            <div className="w-full bg-white shadow-lg border border-gray-100 flex flex-col rounded-2xl overflow-hidden">
             {/* Header */}
             <div className="px-10 pt-10 pb-6 border-b border-gray-50">
               <h1
@@ -180,52 +169,15 @@ export default function ArticleDetail() {
                   onClick={() => setLiked(!liked)}
                   className={`flex items-center gap-2 text-sm font-semibold transition-colors ${liked ? "text-[#2563eb]" : "text-gray-400 hover:text-[#2563eb]"}`}
                 >
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill={liked ? "currentColor" : "none"}
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
+                  <HeartIcon className="w-4 h-4" filled={liked} />
                   {ARTICLE.engagement.likes + (liked ? 1 : 0)}
                 </button>
                 <button className="flex items-center gap-2 text-sm font-semibold text-gray-400 hover:text-[#2563eb] transition-colors">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                  </svg>
+                  <MessageIcon className="w-4 h-4" />
                   {ARTICLE.engagement.comments}
                 </button>
                 <button className="flex items-center gap-2 text-sm font-semibold text-gray-400 hover:text-[#2563eb] transition-colors">
-                  <svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="18" cy="5" r="3" />
-                    <circle cx="6" cy="12" r="3" />
-                    <circle cx="18" cy="19" r="3" />
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-                  </svg>
+                  <ShareIcon className="w-4 h-4" />
                   {ARTICLE.engagement.shares}
                 </button>
               </div>
@@ -234,36 +186,10 @@ export default function ArticleDetail() {
                   onClick={() => setBookmarked(!bookmarked)}
                   className={`transition-colors ${bookmarked ? "text-[#2563eb]" : "text-gray-400 hover:text-[#2563eb]"}`}
                 >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill={bookmarked ? "currentColor" : "none"}
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-                  </svg>
+                  <BookmarkIcon className="w-4 h-4" filled={bookmarked} />
                 </button>
                 <button className="text-gray-400 hover:text-[#2563eb] transition-colors">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="18" cy="5" r="3" />
-                    <circle cx="6" cy="12" r="3" />
-                    <circle cx="18" cy="19" r="3" />
-                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-                  </svg>
+                  <ShareIcon className="w-4 h-4" />
                 </button>
               </div>
             </div>
@@ -290,19 +216,7 @@ export default function ArticleDetail() {
                   <button
                     className={`flex-shrink-0 transition-colors ${comment ? "text-[#2563eb]" : "text-gray-300"}`}
                   >
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <line x1="22" y1="2" x2="11" y2="13" />
-                      <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                    </svg>
+                    <SendIcon className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -317,8 +231,9 @@ export default function ArticleDetail() {
                 </button>
               </div>
             </div>
+            </div>
           </div>
-        </div>
+        </ContentWrapper>
       </div>
     </PageLayout>
   );
