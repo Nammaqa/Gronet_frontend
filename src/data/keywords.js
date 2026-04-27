@@ -245,3 +245,141 @@ export const PROFILE_POSTS = [
     time: "1d ago",
   },
 ];
+
+
+// Gronetters Page Data-----------------------------------------------
+
+export const networkUsers = [
+  {
+    name: "Marcus Thorne",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    designation: "Structural Eng."
+  },
+  {
+    name: "Sarah Jenkins",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    designation: "Interior Designer"
+  },
+  {
+    name: "Julian Vane",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    designation: "LEED Specialist"
+  },
+  {
+    name: "Anya Patel",
+    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+    designation: "Facade Design"
+  },
+  {
+    name: "Tom Henderson",
+    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+    designation: "Site Manager"
+  },
+  {
+    name: "Maya Garcia",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    designation: "Landscape Arch."
+  },
+  {
+    name: "Kevin Lee",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    designation: "BIM Coordinator"
+  },
+  {
+    name: "Claire Wong",
+    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+    designation: "Urban Designer"
+  },
+];
+
+export const tabsList = ["Requests Received", "Requests Sent", "My Network", "Suggestions"];
+
+
+
+export const Pending = [
+  {
+    id: 1,
+    name: "David Chen",
+    img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=70&h=70&fit=crop",
+    designation: "Senior Research Scientist",
+    time: "2h ago",
+    title: "Practical techniques for optimizing inference on edge devices",
+    desc: "Working on a project where we need to run real-time segmentation on mobile hardware. We've seen significant improvements using quantization-aware training but struggling with some specific latency spikes on older Android chipsets. Anyone have experience with...",
+    likes: 142,
+    comments: 28
+  },
+  {
+    id: 2,
+    name: "Sarah Miller",
+    img: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=70&h=70&fit=crop",
+    designation: "AI Ethicist",
+    time: "5h ago",
+    title: "New EU AI Act: What it means for developers in this group",
+    desc: "Understanding the implications of new regulations and how developers should prepare...",
+    likes: 389,
+    comments: 104
+  }
+];
+
+// ── My Groups Page Data ───────────────────────────────────────────
+
+export const groups = [
+  {
+    title: "FinTech Innovations",
+    description:
+      "Discussing the future of decentralized finance and enterprise blockchain applications...",
+    members: "1.2k members",
+    tag: "TOP TIER",
+    image: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df",
+  },
+  {
+    title: "Agile Architecture",
+    description:
+      "Exploring systems design and organizational scalability for Series B+ technology startups.",
+    members: "854 members",
+    tag: "CURATED",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWNBprRdG6JntNAUrrufIL78QETTGrL0zqBg&s",
+  },
+  {
+    title: "Strategic Operations",
+    description:
+      "Best practices for operational excellence in manufacturing and global supply chain...",
+    members: "3.4k members",
+    image: "https://static.vecteezy.com/system/resources/previews/060/505/540/large_2x/modern-industrial-workspace-with-machinery-and-technology-for-manufacturing-processes-photo.jpeg",
+  },
+  {
+    title: "Cyber Defense Forum",
+    description:
+      "Sharing vulnerability insights and defense strategies for modern enterprise networks.",
+    members: "920 members",
+    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f",
+  },
+  {
+    title: "Marketing Intelligence",
+    description:
+      "Data-driven marketing strategies and performance measurement for global brands.",
+    members: "2.1k members",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f",
+  },
+];
+
+export const createGroup = {
+  image: "https://lens.usercontent.google.com/banana?agsi=CmdnbG9iYWw6OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAwZWI6MTo2NmNmOWY2Mjc2NjFhMzc1OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAxNzJhMzEwMzM2ODowMDA2NTAyZjEyYjM0ZjRmEAIYAQ==",
+}
+
+export const banner = {
+  image: "https://lens.usercontent.google.com/banana?agsi=CmdnbG9iYWw6OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAwZWI6MTo2ZmVlMTRmMzBjYTc2Yjg2OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAxNzJhMzEwMzM2ODowMDA2NTAyZTc3MGE1OGRmEAIYAQ==",
+}
+
+export const profile = {
+  image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+};
+
+export const DiscussionVisual = {
+  image: "https://lens.usercontent.google.com/banana?agsi=CmdnbG9iYWw6OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAwZWI6MTpjZDlkOWU4YjBkODYyY2I0OjAwMDA1NWNmZWM3MDAyNmQ6MDAwMDAxNzJhMzEwMzM2ODowMDA2NTAyZTkyODRkZTVmEAIYAQ==",
+
+}
+
+export const m1 = {
+  image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop",
+}

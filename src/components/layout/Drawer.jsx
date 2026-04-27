@@ -6,6 +6,7 @@ const DRAWER_LINKS = [
   { name: "Home", to: "/home", Icon: HomeIcon },
   { name: "Explore", to: "/explore", Icon: SearchIcon },
   { name: "Discussion", to: "/article", Icon: DiscussionIcon },
+  { name: "Gronetters", to: "/my-gronetters", Icon: UserIcon },
   { name: "Profile", to: "/profile", Icon: UserIcon },
   { name: "Settings", to: "/settings", Icon: SettingsIcon },
 ];
@@ -35,8 +36,7 @@ export default function Drawer({ isOpen, onClose }) {
                   to={to}
                   onClick={onClose}
                   className={({ isActive }) =>
-                    `w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold text-[15px] transition-all ${
-                      isActive ? 'bg-[#191970] text-white shadow-lg shadow-blue-100' : 'text-gray-400 hover:bg-[#CBD5E0] hover:text-gray-700'
+                    `w-full flex items-center gap-4 px-4 py-3.5 rounded-2xl font-bold text-[15px] transition-all ${isActive ? 'bg-[#191970] text-white shadow-lg shadow-blue-100' : 'text-gray-400 hover:bg-[#CBD5E0] hover:text-gray-700'
                     }`
                   }
                 >
