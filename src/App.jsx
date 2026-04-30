@@ -14,6 +14,10 @@ import ArticleDetail from "./pages/ArticleDetail";
 import ComingSoon from "./pages/ComingSoon";
 import CreatePost from "./pages/CreatePost";
 import CreateDiscussion from "./pages/CreateDiscussion";
+import MyGronetters from "./pages/MyGronetters";
+import MyGroups from "./pages/MyGroups";
+import CreateGroup from "./pages/CreateGroup";
+import GroupDetails from "./pages/GroupDetails";
 
 function App() {
   return (
@@ -30,6 +34,11 @@ function App() {
         <Route path="/create-discussion" element={<CreateDiscussion />} />
         <Route path="/article" element={<ArticleDetail />} />
         <Route path="*" element={<ComingSoon />} />
+        <Route path="/my-gronetters" element={<MyGronetters />} />
+        <Route path="/groups" element={< MyGroups />} />
+        <Route path="/create-group" element={<CreateGroup />} />
+        <Route path="/group-detail" element={<GroupDetails />} />
+
       </Routes>
     </Router>
   );
