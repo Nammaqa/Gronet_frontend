@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { CURRENT_USER } from "../../data/keywords";
-import { HomeIcon, SearchIcon, DiscussionIcon, UserIcon, SettingsIcon, CloseIcon } from "../Icons";
+import { HomeIcon, SearchIcon, DiscussionIcon, UserIcon, SettingsIcon, CloseIcon, MessageIcon } from "../Icons";
 
 const DRAWER_LINKS = [
   { name: "Home", to: "/home", Icon: HomeIcon },
   { name: "Explore", to: "/explore", Icon: SearchIcon },
   { name: "Discussion", to: "/article", Icon: DiscussionIcon },
   { name: "Gronetters", to: "/my-gronetters", Icon: UserIcon },
+  { name: "Messages", to: "/messages", Icon: MessageIcon },
   { name: "Profile", to: "/profile", Icon: UserIcon },
   { name: "Settings", to: "/settings", Icon: SettingsIcon },
 ];
