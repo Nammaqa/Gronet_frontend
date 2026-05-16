@@ -1,7 +1,7 @@
 import React from "react";
 import { m1, banner, profile, DiscussionVisual } from "../data/keywords.js";
 import { Pending, networkUsers } from "../data/keywords.js";
-import { Search } from "lucide-react";
+import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/layout/BottomNav.jsx";
 
@@ -30,7 +30,7 @@ export default function GroupDetail() {
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <Search className="w-5 h-5 text-gray-600 cursor-pointer" />
+                        <FiSearch className="w-5 h-5 text-gray-600 cursor-pointer" />
                         <img
                             src={profile.image}
                             alt="profile"
