@@ -292,7 +292,6 @@ export const networkUsers = [
   },
 ];
 
-export const tabsList = ["Requests Received", "Requests Sent", "My Network", "Suggestions"];
 
 
 
@@ -383,3 +382,50 @@ export const DiscussionVisual = {
 export const m1 = {
   image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&h=200&fit=crop",
 }
+
+// message--------------------------
+export const chatData = [
+  {
+    id: 0,
+    name: "Elena Vance",
+    message: "The Q3 strategy reports are ready...",
+    time: "12:45 PM",
+    active: true,
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+  },
+  {
+    id: 1,
+    name: "Marcus Chen",
+    message: "Did you see the new UI proposal...",
+    time: "Yesterday",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+  },
+  {
+    id: 2,
+    name: "Sarah Jenkins",
+    message: "I'll send over the meeting invite...",
+    time: "Tue",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+  },
+  {
+    id: 3,
+    name: "Julian Rossi",
+    message: "Great job on the presentation!",
+    time: "Mon",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+  },
+  {
+    id: 4,
+    name: "Aria Montgomery",
+    message: "Let's connect next week...",
+    time: "Oct 12",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+  },
+  {
+    id: 5,
+    name: "Robert Vance",
+    message: "Checking in on the client feedback...",
+    time: "Oct 10",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
+  },
+];

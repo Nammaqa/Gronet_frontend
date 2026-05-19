@@ -112,16 +112,17 @@ export default function MyGroups() {
                         </div>
 
                         {open && (
-                            <div className="absolute mt-2 bg-indigo-50 rounded-lg p-2 shadow-lg z-50">
+                            <div className="relative mt-2 bg-indigo-50 rounded-lg p-2 shadow-lg z-50 w-full">
                                 <div
-                                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-100 font-bold cursor-pointer"
+                                    className="w-full flex items-center gap-2 px-4 py-2 rounded-lg bg-red-100 font-bold cursor-pointer"
                                     onClick={() => {
                                         setSelectedGroup("My Gronetters");
                                         setOpen(false);
                                         navigate("/my-gronetters");
                                     }}
                                 >
-                                    <img src="/assets/icons/members.png" alt="members" className="w-5" />                                    My Gronetters
+                                    <img src="/assets/icons/members.png" alt="members" className="w-5" />
+                                    My Gronetters
                                 </div>
                             </div>
                         )}

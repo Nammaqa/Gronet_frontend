@@ -18,6 +18,8 @@ import MyGronetters from "./pages/MyGronetters";
 import MyGroups from "./pages/MyGroups";
 import CreateGroup from "./pages/CreateGroup";
 import GroupDetails from "./pages/GroupDetails";
+import Message from "./pages/Message";
+import ActiveChart from "./pages/ActiveChart";
 
 function App() {
   return (
@@ -38,6 +40,8 @@ function App() {
         <Route path="/groups" element={< MyGroups />} />
         <Route path="/create-group" element={<CreateGroup />} />
         <Route path="/group-detail" element={<GroupDetails />} />
+        <Route path="/messages" element={<Message />} />
+        <Route path="/active-chart" element={<ActiveChart />} />
 
       </Routes>
     </Router>

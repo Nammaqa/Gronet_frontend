@@ -1,29 +1,103 @@
-import React, { useState } from "react";
+// In  API Calls based on tab change false to true to get real data 
+
+
+
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { networkUsers, tabsList, Pending } from "../data/keywords.js";
+import { networkUsers, Pending } from "../data/keywords.js";
 import Navbar from "../components/Navbar/Navbar";
+import api from "../services/api.js";
 
 export default function MyGronetters() {
 
-    // ✅ Use dummy data only
+    const navigate = useNavigate();
+
+    // Local Tabs
+    const tabsList = [
+        "Requests Received",
+        "Requests Sent",
+        "My Network",
+        "Suggestions"
+    ];
+
+    // Left section (Pending - local data)
     const [pending, setPending] = useState(Pending);
 
+    // Active tab
     const [activePage, setActivePage] = useState("Requests Received");
+
+    // Dropdown
     const [open, setOpen] = useState(false);
     const [selectedGroup, setSelectedGroup] = useState("My Gronetters");
 
-    const navigate = useNavigate();
+    // API states
+    const [requestsReceived, setRequestsReceived] = useState([]);
+    const [requestsSent, setRequestsSent] = useState([]);
+    const [networkData, setNetworkData] = useState([]);
+    const [suggestions, setSuggestions] = useState([]);
 
-    // ✅ NO API CALL
+    // Approve / Reject
     const handleApprove = (id) => {
         setPending((prev) => prev.filter((u) => u.id !== id));
-        alert("Request Approved ✅");
+        alert("Request Approved");
     };
 
     const handleReject = (id) => {
         setPending((prev) => prev.filter((u) => u.id !== id));
-        alert("Rejected ❌");
+        alert("Request Rejected");
     };
+
+    // API Calls based on tab
+    const USE_API = false; // Toggle this to true to use real API calls instead of local data
+    useEffect(() => {
+        if (!USE_API) return;
+
+        const fetchData = async () => {
+            try {
+                let response;
+
+                if (activePage === "Requests Received" && requestsReceived.length === 0) {
+                    response = await fetch("/requests-received");
+                    const data = await response.json();
+                    setRequestsReceived(data);
+
+                } else if (activePage === "Requests Sent" && requestsSent.length === 0) {
+                    response = await fetch("/requests-sent");
+                    const data = await response.json();
+                    setRequestsSent(data);
+
+                } else if (activePage === "My Network" && networkData.length === 0) {
+                    response = await fetch("/network");
+                    const data = await response.json();
+                    setNetworkData(data);
+
+                } else if (activePage === "Suggestions" && suggestions.length === 0) {
+                    response = await fetch("/suggestions");
+                    const data = await response.json();
+                    setSuggestions(data);
+                } else if (activePage === "My Network" && networkData.length === 0) {
+                    response = await fetch("/network");
+                    const data = await response.json();
+                    setNetworkData(data);
+                }
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        };
+
+        fetchData();
+    }, [activePage]);
+
+    // Map data to tab
+    const tabDataMap = {
+        "Requests Received": requestsReceived,
+        "Requests Sent": requestsSent,
+        "My Network": networkUsers,
+        "Suggestions": suggestions
+    };
+
+    const currentData = tabDataMap[activePage];
 
     return (
         <div className="bg-[#f5f7fb] min-h-screen">
@@ -34,6 +108,7 @@ export default function MyGronetters() {
                 {/* HEADER */}
                 <div className="flex justify-between items-center mb-5 flex-wrap gap-3">
 
+                    {/* Dropdown */}
                     <div className="relative">
                         <div
                             onClick={() => setOpen(!open)}
@@ -49,7 +124,7 @@ export default function MyGronetters() {
                                     onClick={() => {
                                         setSelectedGroup("My Gronetters");
                                         setOpen(false);
-                                        navigate("/group-detail");
+                                        navigate("/groups");
                                     }}
                                     className="flex items-center gap-2 px-3 py-2 bg-[#fde2e0] rounded-lg cursor-pointer font-semibold"
                                 >
@@ -65,14 +140,14 @@ export default function MyGronetters() {
                     </div>
 
                     {/* Tabs */}
-                    <div className="flex bg-[#eff4ff] rounded-lg text-sm font-semibold overflow-x-auto ">
+                    <div className="flex bg-[#eff4ff] rounded-lg text-sm font-semibold overflow-x-auto">
                         {tabsList.map((tab) => (
                             <button
                                 key={tab}
                                 onClick={() => setActivePage(tab)}
                                 className={`px-6 py-2 rounded-lg ${activePage === tab
                                     ? "bg-[#031d4e] text-white"
-                                    : "hover:bg-[#e0e7fd] w-fit"
+                                    : "hover:bg-[#e0e7fd]"
                                     }`}
                             >
                                 {tab}
@@ -84,7 +159,7 @@ export default function MyGronetters() {
                 {/* CONTENT */}
                 <div className="flex gap-8 mt-5 flex-col lg:flex-row">
 
-                    {/* LEFT */}
+                    {/* LEFT - Pending */}
                     <div className="lg:w-[45%] w-full">
                         <h3 className="font-semibold text-lg">
                             Pending Invitations
@@ -128,13 +203,16 @@ export default function MyGronetters() {
                         ))}
                     </div>
 
-                    {/* RIGHT */}
+                    {/* RIGHT - Dynamic Tabs */}
                     <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-center">
                             <h3 className="font-semibold text-[#031d4e]">My Network</h3>
+                            <span className="cursor-pointer font-semibold text-[#031d4e] hover:underline">
+                                View All →
+                            </span>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-3 mt-3">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 mt-3">
                             {networkUsers.map((user, i) => (
                                 <div
                                     key={i}
@@ -146,7 +224,13 @@ export default function MyGronetters() {
                                     />
                                     <h4 className="mt-3 font-bold">{user.name}</h4>
                                     <p className="text-gray-600">{user.designation}</p>
-                                    <button className="bg-[#031d4e] text-white px-4 py-2 rounded-lg cursor-pointer" on>Message</button>
+
+                                    <button
+                                        className="bg-[#031d4e] text-white px-4 py-2 rounded-lg cursor-pointer"
+                                        onClick={() => navigate("/messages")}
+                                    >
+                                        Message
+                                    </button>
                                 </div>
                             ))}
                         </div>
@@ -157,3 +241,4 @@ export default function MyGronetters() {
         </div>
     );
 }
+
