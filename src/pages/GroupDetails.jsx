@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
     m1,
     banner,
@@ -9,8 +9,6 @@ import {
 } from "../data/keywords.js";
 import { Search } from "lucide-react";
 import React from "react";
-import { m1, banner, profile, DiscussionVisual } from "../data/keywords.js";
-import { Pending, networkUsers } from "../data/keywords.js";
 import { FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import BottomNav from "../components/layout/BottomNav.jsx";
